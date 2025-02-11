@@ -1,0 +1,23 @@
+{
+  "name": "player-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update": "chmod a+x updategitdependency.sh && ./updategitdependency.sh",
+    "build": "chmod a+x buildtestimage.sh && ./buildtestimage.sh c3pobot/player-sync",
+    "prod": "chmod a+x buildprodimage.sh && ./buildprodimage.sh c3pobot/player-sync"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-array-sorter": "^0.0.5",
+    "logger": "github:c3pobot/logger",
+    "mongoclient": "github:c3pobot/mongoclient",
+    "node-fetch": "^2.6.7",
+    "numeral": "^2.0.6",
+    "rabbitmq-client": "^4.5.4",
+    "statcalc": "github:c3pobot/statcalc"
+  }
+}
