@@ -1,7 +1,7 @@
 'use strict'
 const log = require('logger')
 const fetch = require('./fetch');
-const GAME_CLIENT_URL = process.env.GAME_CLIENT_URL
+const GAME_CLIENT_URL = process.env.GAME_CLIENT_URL, API_KEY = process.env.API_KEY
 const reAuthCodes = {
   4: 'SESSIONEXPIRED',
   5: 'AUTHFAILED',
@@ -46,7 +46,7 @@ const requestWithRetry = async(uri, opts = {}, count = 0)=>{
 
 module.exports = async(uri, payload = {})=>{
   try{
-    let opts = { headers: { 'Content-Type': 'application/json'}, timeout: 30000, compress: true, method: 'POST' }
+    let opts = { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}`}, timeout: 30000, compress: true, method: 'POST' }
     let body = { payload: payload }
     opts.body = JSON.stringify(body)
     let res = await requestWithRetry(`${GAME_CLIENT_URL}/${uri}`, opts)
