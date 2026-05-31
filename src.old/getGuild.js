@@ -1,9 +1,10 @@
 'use strict'
 const log = require('logger')
-const mongo = require('mongoclient')
 const swgohClient = require('./swgohClient')
 const getPlayers = require('./getPlayers')
 const formatGuild = require('./formatGuild')
+
+const { guildCache } = require('valkey-cache')
 
 module.exports = async( guildId )=>{
   try{
@@ -19,7 +20,8 @@ module.exports = async( guildId )=>{
     if(guild?.member?.length !== members?.length) return
     formatGuild(guild, members)
     if(!guild.gp) return
-    await mongo.set('guildCache', { _id: guildId }, guild)
+
+    await guildCache.set(guild)
     log.debug(`guild pull took ${(timeEnd - timeStart) / 1000} seconds`)
   }catch(e){
     log.error(e)

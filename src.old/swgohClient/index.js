@@ -1,7 +1,7 @@
 'use strict'
 const log = require('logger')
 const fetch = require('./fetch');
-const GAME_CLIENT_URL = process.env.GAME_CLIENT_URL, API_KEY = process.env.API_KEY
+const GAME_CLIENT_URL = process.env.GAME_CLIENT_URL || 'http://swgoh-client:3000', API_KEY = process.env.API_KEY
 const reAuthCodes = {
   4: 'SESSIONEXPIRED',
   5: 'AUTHFAILED',
@@ -10,7 +10,6 @@ const reAuthCodes = {
   55: 'PRIORITYFORCECLIENTRESTART'
 }
 let retryCount = +process.env.CLIENT_RETRY_COUNT || 6
-
 const requestWithRetry = async(uri, opts = {}, count = 0)=>{
   try{
     let res = await fetch(uri, opts)
