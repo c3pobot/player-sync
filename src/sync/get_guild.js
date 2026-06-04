@@ -22,7 +22,7 @@ export default async function(guildId){
     if(!guild.gp) return
 
     await guildCache.set(guildId, guild)
-    //log.debug(`guild pull took ${(timeEnd - timeStart) / 1000} seconds`)
+    log.debug(`guild pull took ${(timeEnd - timeStart) / 1000} seconds`)
   }catch(e){
     log.error(e)
   }

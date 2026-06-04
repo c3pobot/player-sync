@@ -15,12 +15,11 @@ async function requestWithRetry(url, opts, count = 0){
     count++
     let res = await parseResponse(r)
     if(!r.ok && !res?.code && count < retryCount) return await requestWithRetry(url, opts, count)
-    if(!r.ok && res?.code && count < retryCount){
-      if(res?.code == 6 || !reAuthCodes[res.code]) return await requestWithRetry(url, opts, count)
-    }
+    if(!r.ok && res?.code == 6 && count < retryCount) return await requestWithRetry(url, opts, count)
     if(!r.ok) return
     return res
   }catch(e){
+    if(e?.message) return console.log(e.message)
     log.error(e)
   }
 }

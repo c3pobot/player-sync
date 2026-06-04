@@ -11,7 +11,7 @@ function filterMembers(all = [], found = []){
 
 async function getMembers(members = []){
   let res = []
-  await eachLimit(members, 25, async(member)=>{
+  await eachLimit(members, 10, async(member)=>{
     let player = await getPlayer(member.playerId)
     if(player?.allyCode) res.push(player)
   })
